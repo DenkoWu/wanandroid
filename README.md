@@ -1,16 +1,8 @@
 # wanandroid
 
-A new Flutter application.
+#git 相关命令
+git remote set-url origin git@github.com:DenkoWu/wanandroid.git  #重新设置giturl
+git config --list  #查看git配置
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+#项目参考资料
+https://book.flutterchina.club/chapter14/flutter_app_startup.html  #flutter中文手册
