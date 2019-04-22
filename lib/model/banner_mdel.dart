@@ -1,4 +1,4 @@
-class BannerMdel {
+class BannerModel {
   String desc;
   String imagePath;
   String title;
@@ -8,9 +8,9 @@ class BannerMdel {
   int order;
   int type;
 
-  BannerMdel({this.desc, this.imagePath, this.title, this.url, this.id, this.isVisible, this.order, this.type});
+  BannerModel({this.desc, this.imagePath, this.title, this.url, this.id, this.isVisible, this.order, this.type});
 
-  BannerMdel.fromJson(Map<String, dynamic> json) {    
+  BannerModel.fromJson(Map<String, dynamic> json) {    
     this.desc = json['desc'];
     this.imagePath = json['imagePath'];
     this.title = json['title'];

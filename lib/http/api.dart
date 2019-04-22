@@ -14,7 +14,7 @@ class Api{
     if(page!=null){
       stringBuffer.write('$page');
     }
-    if(resType!=null&&resType.isEmpty){
+    if(resType!=null&&resType.isNotEmpty){
       stringBuffer.write('/$resType');
     }
     return stringBuffer.toString();

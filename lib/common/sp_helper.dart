@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:flustars/flustars.dart';
+import 'package:wanandroid/model/language_model.dart';
+
+import 'common.dart';
 
 class SpHelper {
   // T 用于区分存储类型
@@ -28,15 +31,15 @@ class SpHelper {
     }
   }
 
-//  static LanguageModel getLanguageModel() {
-//    Map map = SpUtil.getObject(Constant.keyLanguage);
-//    return map == null ? null : LanguageModel.fromJson(map);
-//  }
-//
-//  static String getThemeColor() {
-//    return SpUtil.getString(Constant.KEY_THEME_COLOR, defValue: 'gray');
-//  }
-//
+  static LanguageModel getLanguageModel() {
+    Map map = SpUtil.getObject(Constant.keyLanguage);
+    return map == null ? null : LanguageModel.fromJson(map);
+  }
+
+  static String getThemeColor() {
+    return SpUtil.getString(Constant.KEY_THEME_COLOR, defValue: 'gray');
+  }
+
 //  static SplashModel getSplashModel() {
 //    Map map = SpUtil.getObject(Constant.KEY_SPLASH_MODEL);
 //    return map == null ? null : SplashModel.fromJson(map);
