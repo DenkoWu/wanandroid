@@ -52,8 +52,11 @@ class _MainPageState extends State<MainPage> {
   void _onBottomTapped(int index) {
     setState(() {
       _selectIndex = index;
-      _pageController.animateToPage(index,
-          duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      //滚动跳转
+//      _pageController.animateToPage(index,
+//          duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      //直接跳转
+      _pageController.jumpToPage(index);
     });
   }
 
