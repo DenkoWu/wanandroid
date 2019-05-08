@@ -3,6 +3,7 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flukit/flukit.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:wanandroid/blocs/bloc_provider.dart';
 import 'package:wanandroid/blocs/main_bloc.dart';
 import 'package:wanandroid/model/banner_mdel.dart';
@@ -14,6 +15,8 @@ import 'package:wanandroid/utils/navigator_util.dart';
 export 'package:wanandroid/values/_res_index.dart';
 
 import 'package:wanandroid/ui/widget/listview_item.dart';
+
+bool isReposInit = true;
 
 class HomePage extends StatefulWidget {
   final String labelId;
@@ -56,11 +59,6 @@ Widget buildBanner(BuildContext context, List<BannerModel> list) {
 }
 
 Widget buildHomeList(BuildContext context, List<DatasListBean> list) {
-  BoxDecoration(
-    borderRadius: BorderRadius.circular(3),
-//    boxShadow: [offset:off],
-  );
-
   List<Widget> widgets = list.map((model) {
     return ListViewItem(data: model);
     ;
@@ -74,7 +72,6 @@ Widget buildHomeList(BuildContext context, List<DatasListBean> list) {
 
 class _HomePageState extends State<HomePage> {
   String labelId;
-  RefreshController _controller = new RefreshController();
 
   _HomePageState(String content) {
     this.labelId = content;
@@ -83,8 +80,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final MainBloc bloc = BlocProvider.of<MainBloc>(context);
-    bloc.getBanner();
-    bloc.getHomeList(true);
+    RefreshController _controller = new RefreshController();
+    bloc.homeEventStream.listen((event) {
+      //下拉刷新控件状态重置
+      _controller.sendBack(false, event.status);
+    });
+    if (isReposInit) {
+      isReposInit = false;
+      Observable.just(1).delay(new Duration(milliseconds: 500)).listen((_) {
+        bloc.getBanner();
+        bloc.getHomeList(true);
+      });
+    }
+
     return StreamBuilder(
         stream: bloc.bannerStream,
         builder:
@@ -93,23 +101,25 @@ class _HomePageState extends State<HomePage> {
             labelId: labelId,
             isLoading: snapshot.data == null,
             controller: _controller,
-            enablePullUp: false,
+            onLoadMore: (up) {
+              bloc.getHomeList(false);
+            },
             onRefresh: () {
-              return bloc.getBanner();
+              return bloc.getHomeList(true);
             },
             child: ListView(
               children: <Widget>[
                 buildBanner(context, snapshot.data),
                 StreamBuilder(
                   stream: bloc.homeStranm,
-                  builder:
-                      (BuildContext context, AsyncSnapshot<HomeBean> model) {
-                    if (model.data == null) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<DatasListBean>> data) {
+                    if (data == null) {
                       return new Container(
                         height: 0.0,
                       );
                     }
-                    return buildHomeList(context, model.data.datas);
+                    return buildHomeList(context, data.data);
                   },
                 ),
               ],

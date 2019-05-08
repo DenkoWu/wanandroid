@@ -23,7 +23,7 @@ class _ListViewItemState extends State<ListViewItem> {
     return Card(
       color: Colors.white,
 //      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0))),//设置圆角
-      elevation: 4.0,
+      elevation: 0.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
       child: ListTile(
 //        contentPadding: EdgeInsets.only(left: 10,top: 10,right: 10,bottom: 10),
@@ -61,6 +61,8 @@ class _ListViewItemState extends State<ListViewItem> {
                   ),
                   Padding(
                     child: Text(data.title,
+                        maxLines: 1,
+                        overflow:  TextOverflow.ellipsis,
                         style:
                             TextStyle(color: Colours.green_1, fontSize: 12.0)),
                     padding: EdgeInsets.only(bottom: 10.0),

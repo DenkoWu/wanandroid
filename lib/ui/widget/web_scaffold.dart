@@ -50,6 +50,7 @@ class WebScaffoldState extends State<WebScaffold> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        backgroundColor: Colors.green,
         title: new Text(
           widget.title ?? IntlUtil.getString(context, widget.titleId),
           maxLines: 1,

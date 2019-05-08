@@ -35,7 +35,7 @@ class _MainLeftPageState extends State<MainLeftPage> {
       body: Column(
         children: <Widget>[
           Container(
-            color: Theme.of(context).primaryColor,
+            color: Colors.green,
             padding: EdgeInsets.only(
                 top: ScreenUtil.getInstance().statusBarHeight, left: 10.0),
             child: new SizedBox(
@@ -104,20 +104,3 @@ class _MainLeftPageState extends State<MainLeftPage> {
   }
 }
 
-//,new Expanded(
-//child: new ListView.builder(
-//padding: const EdgeInsets.all(0.0),
-//itemCount: _pageInfo.length,
-//itemBuilder: (BuildContext context, int index) {
-//PageInfo pageInfo = _pageInfo[index];
-//return new ListTile(
-//leading: new Icon(pageInfo.iconData),
-//title:
-//new Text( pageInfo.titleId),
-//onTap: () {
-//
-//},
-//);
-//}),
-//flex: 1,
-//)

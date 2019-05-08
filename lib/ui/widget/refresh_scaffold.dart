@@ -1,3 +1,4 @@
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wanandroid/ui/widget/widgets.dart';
@@ -21,6 +22,7 @@ class RefreshScaffold extends StatefulWidget {
 
   final String labelId;
   final bool isLoading;
+
 //  final RefreshController controller;
   final bool enablePullUp;
   final RefreshCallback onRefresh;
@@ -28,7 +30,7 @@ class RefreshScaffold extends StatefulWidget {
   final Widget child;
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
-  final  RefreshController controller;
+  final RefreshController controller;
 
   @override
   State<StatefulWidget> createState() {
@@ -60,14 +62,15 @@ class RefreshScaffoldState extends State<RefreshScaffold>
   }
 
   Widget buildFloatingActionButton() {
-    if (widget.controller.getController() == null ||
-        widget.controller.getController().offset < 480) {
-      return null;
-    }
+//    if (widget.controller.getController() == null ||
+//        widget.controller.getController().offset < 480) {
+//      return null;
+//    }
 
     return new FloatingActionButton(
         heroTag: widget.labelId,
-        backgroundColor: Theme.of(context).primaryColor,
+//        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.green,
         child: Icon(
           Icons.keyboard_arrow_up,
         ),
@@ -98,7 +101,7 @@ class RefreshScaffoldState extends State<RefreshScaffold>
                           itemBuilder: widget.itemBuilder,
                         )),
                 onRefresh: widget.onRefresh),
-             Offstage(
+            Offstage(
               offstage: widget.isLoading != true,
               child: new Container(
                 alignment: Alignment.center,
